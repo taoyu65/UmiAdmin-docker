@@ -1,0 +1,54 @@
+version: "2"
+services:
+# 暂时不用
+    # redis:
+    #   image: redis:alpine
+    #   container_name: swapsy-redis
+    mysql:
+      build:
+        context: 'phpdocker/mysql'
+        dockerfile: Dockerfile
+      container_name: swapsy-mysql
+      working_dir: /var/lib/mysql
+      volumes:
+        - ./app/db/mysql:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=pass
+        - MYSQL_DATABASE=db
+      ports:
+        - "13306:3306"
+      # command: mysqld --sql_mode="(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"
+      restart: always
+    webserver:
+      image: nginx:alpine
+      container_name: swapsy-webserver
+      working_dir: /var/www/html/web
+      volumes:
+        - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./app/nginx/log:/var/log/nginx
+      ports:
+        - "4444:4444"
+        - "4445:4445"
+      depends_on:
+        - php
+      volumes_from:
+        - php
+      networks:
+        default:
+          aliases:
+            - backend.dev
+            - frontend.dev
+      # link: mysql
+    php:
+      build: phpdocker/php-fpm
+      container_name: swapsy-php-fpm
+      working_dir: /application/web/swapsy
+      volumes:
+        - ./app/web:/var/www/html/web
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+      depends_on:
+        - mysql
+      environment:
+        PHP_EXTENSION_XDEBUG: 1
+        XDEBUG_CONFIG: "remote_enable=1 remote_host=192.168.0.3 remote_port=9001 remote_connect_back=0 remote_autostart=1 var_display_max_data=1024 var_display_max_depth=5"
+        PHP_IDE_CONFIG: "serverName=dock-debug-server"
