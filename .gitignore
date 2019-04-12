@@ -1,8 +1,17 @@
+/app/db/*
+!/app/db/.gitkeep
+
 /app/db/mysql/*
 !/app/db/mysql/.gitkeep
 
-/app/db/nginx/log/*
-!/app/db/nginx/log/.gitkeep
+/app/nginx/*
+!/app/nginx/.gitkeep
+
+/app/nginx/log/*
+!/app/nginx/log/.gitkeep
+
+/app/web/*
+!/app/web/.gitkeep
 
 /app/web/swapsy/*
 !/app/web/swapsy/.gitkeep
