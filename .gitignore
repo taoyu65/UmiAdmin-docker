@@ -16,3 +16,4 @@
 /app/web/swapsy/*
 !/app/web/swapsy/.gitkeep
 
+app/nginx/log
