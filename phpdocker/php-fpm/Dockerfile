@@ -2,7 +2,7 @@ FROM bscheshir/php:7.3.3-fpm-alpine-4yii2-xdebug
 
 MAINTAINER taoyu taoyu65@gmail.com
 
-WORKDIR "/application"
+WORKDIR "/var/www/html/web/swapsy"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
