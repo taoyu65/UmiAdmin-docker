@@ -42,7 +42,7 @@ services:
     php:
       build: phpdocker/php-fpm
       container_name: swapsy-php-fpm
-      working_dir: /application/web/swapsy
+      working_dir: /var/www/html/web/swapsy
       volumes:
         - ./app/web:/var/www/html/web
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
