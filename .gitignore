@@ -1,2 +1,3 @@
 app/nginx/log/*
 app/nginx/log
+.DS_Store
