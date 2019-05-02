@@ -27,6 +27,7 @@ services:
         - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         - ./app/nginx/log:/var/log/nginx
       ports:
+        - "4443:4443"
         - "4444:4444"
         - "4445:4445"
         - "4446:4446"
