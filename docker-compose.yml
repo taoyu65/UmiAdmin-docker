@@ -10,6 +10,7 @@ services:
         dockerfile: Dockerfile
       container_name: swapsy-mysql
       working_dir: /var/lib/mysql
+      command: mysqld --sql_mode=""
       volumes:
         - ./app/db/mysql:/var/lib/mysql
       environment:
@@ -47,11 +48,11 @@ services:
       working_dir: /var/www/html/web/swapsy
       volumes:
         - ./../swapsy:/var/www/html/web/swapsy
-        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
         - ./../phpmyadmin:/var/www/html/web/phpmyadmin
       depends_on:
         - mysql
       environment:
         PHP_EXTENSION_XDEBUG: 1
-        XDEBUG_CONFIG: "remote_enable=1 remote_host=192.168.0.4 remote_port=9001 remote_connect_back=0 remote_autostart=1 var_display_max_data=1024 var_display_max_depth=5"
+        XDEBUG_CONFIG: "remote_enable=1 remote_host=192.168.0.8 remote_port=9001 remote_connect_back=0 remote_autostart=1 var_display_max_data=1024 var_display_max_depth=5"
         PHP_IDE_CONFIG: "serverName=dock-debug-server"

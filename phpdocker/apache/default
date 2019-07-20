@@ -1,0 +1,15 @@
+<VirtualHost *:4444>
+        ServerAdmin webmaster@localhost
+
+        DocumentRoot /var/www/html/web/swapsy/frontend/web
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Directory /var/www/html/web/swapsy/frontend/web>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+</VirtualHost>
