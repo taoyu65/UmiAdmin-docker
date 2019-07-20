@@ -1,5 +1,5 @@
-FROM php:7.3
-# FROM bscheshir/php:7.3.3-fpm-alpine-4yii2-xdebug
+# FROM php:7.3
+FROM bscheshir/php:7.3.3-fpm-alpine-4yii2-xdebug
 
 MAINTAINER taoyu taoyu65@gmail.com
 
@@ -10,43 +10,43 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apk --update add \
         php7-mysqli \
         git \
-        # curl \
-        # curl-dev \
+        curl \
+        curl-dev \
         bash \
         bash-completion \
-        # libzip-dev \
-        # freetype-dev \
+        libzip-dev \
+        freetype-dev \
         icu \
-        # icu-dev \
-        # libxml2-dev \
+        icu-dev \
+        libxml2-dev \
         libintl \
         libjpeg-turbo-dev \
         libpng-dev \
         mysql-client \
-        # nodejs \
-        # postgresql-dev && \
+        nodejs \
+        postgresql-dev && \
     docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ \
         --with-png-dir=/usr/include/ && \
-    # docker-php-ext-configure bcmath && \
-    # docker-php-ext-configure pgsql --with-pgsql=/usr/local/pgsql && \
+    docker-php-ext-configure bcmath && \
+    docker-php-ext-configure pgsql --with-pgsql=/usr/local/pgsql && \
     docker-php-ext-install \
         mysqli \
         soap \
-        # zip \
+        zip \
         curl \
-        # bcmath \
-        # exif \
+        bcmath \
+        exif \
         gd \
         iconv \
         intl \
         mbstring \
         opcache \
         pdo_mysql \
-        # pdo_pgsql \
-        # pgsql && \
+        pdo_pgsql \
+        pgsql && \
     apk del \
         icu-dev \
         gcc \
